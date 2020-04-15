@@ -1373,7 +1373,7 @@ func extractTLSVaultPath(host string, ing *ingress.Ingress,
 		// secrKey := fmt.Sprintf("%v/%v", ing.Namespace, tls.SecretName)
 		secrKey := tls.SecretName
 
-		klog.Warningf("[STG] ")
+		klog.Warningf("[STG] controller getLocalSSLCert - secrKey: %s", secrKey)
 
 		cert, err := getLocalSSLCert(secrKey)
 		if err != nil {
