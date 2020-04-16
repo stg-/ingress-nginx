@@ -145,6 +145,14 @@
   revision = "8306686428a5fe132eac8cb7c4848af725098bd4"
 
 [[projects]]
+  digest = "1:bde6b000abbce05d50e85e3f5326705ff7a11c9cfc1982112ff805fa64848dbb"
+  name = "github.com/gofortune/gofortune"
+  packages = ["lib"]
+  pruneopts = "NUT"
+  revision = "036ecbdf9de92598483a89db52f6f79e063f60b5"
+  version = "v0.0.1-snapshot"
+
+[[projects]]
   digest = "1:cd4f86461732066e277335465962660cbf02999e18d5bbb5e9285eac4608b970"
   name = "github.com/gogo/protobuf"
   packages = [
@@ -166,10 +174,11 @@
   revision = "c65c006176ff7ff98bb916961c7abbc6b0afc0aa"
 
 [[projects]]
-  digest = "1:479e958ad7ae540d7a3c565d1839cc7c8ab9b627640144443f1e88d11d4023d0"
+  digest = "1:381fdad8817f7dc3e36a62441e87b29251fcf216d93d39a244fda414ce9f1feb"
   name = "github.com/golang/protobuf"
   packages = [
     "proto",
+    "protoc-gen-go/descriptor",
     "ptypes",
     "ptypes/any",
     "ptypes/duration",
@@ -291,6 +300,14 @@
   pruneopts = "NUT"
   revision = "5c8c8bd35d3832f5d134ae1e1e375b69a4d25242"
   version = "v1.0.1"
+
+[[projects]]
+  digest = "1:11cb6df60c1e454d129213f48f1e232021beeceb0f5aefaef315e6b2c3c3fb1d"
+  name = "github.com/kubernetes/ingress-nginx"
+  packages = ["images/grpc-fortune-teller/proto/fortune"]
+  pruneopts = "NUT"
+  revision = "df61bd756505275baaa5fdc2a3dc4648e62dae95"
+  version = "nginx-0.15.0"
 
 [[projects]]
   branch = "master"
@@ -563,6 +580,14 @@
   version = "v1.0.3"
 
 [[projects]]
+  digest = "1:74455a50d07a9e26d8090572a9192a1a6a2f9ca8f19400b3462cc11b579bcb9d"
+  name = "github.com/vromero/gofortune"
+  packages = ["lib/fortune"]
+  pruneopts = "NUT"
+  revision = "036ecbdf9de92598483a89db52f6f79e063f60b5"
+  version = "v0.0.1-snapshot"
+
+[[projects]]
   digest = "1:c10994a08ed2ff2cc7611d03ded8bb5f782096880b2daab391adbd9ab95a1764"
   name = "github.com/zakjan/cert-chain-resolver"
   packages = ["certUtil"]
@@ -735,7 +760,7 @@
   revision = "31ac5d88444a9e7ad18077db9a165d793ad06a2e"
 
 [[projects]]
-  digest = "1:2f91d3e11b666570f8c923912f1cc8cf2f0c6b7371b2687ee67a8f73f08c6272"
+  digest = "1:d0b680e0e10bfbcbf2e3fed13f7e2ba52096518341a176cce93400e23f427b0d"
   name = "google.golang.org/grpc"
   packages = [
     ".",
@@ -758,6 +783,8 @@
     "metadata",
     "naming",
     "peer",
+    "reflection",
+    "reflection/grpc_reflection_v1alpha",
     "resolver",
     "resolver/dns",
     "resolver/passthrough",
@@ -1148,6 +1175,83 @@
   revision = "61a1735c3f5028c6dd5dc37e0f5573d8872507ba"
 
 [[projects]]
+  digest = "1:cfa4ae7826091f1b70b8fdc95aa18b99387dad2e71e7834f0b5dd9106ce918ff"
+  name = "k8s.io/ingress-nginx"
+  packages = [
+    "internal/file",
+    "internal/ingress",
+    "internal/ingress/annotations",
+    "internal/ingress/annotations/alias",
+    "internal/ingress/annotations/auth",
+    "internal/ingress/annotations/authreq",
+    "internal/ingress/annotations/authtls",
+    "internal/ingress/annotations/backendprotocol",
+    "internal/ingress/annotations/canary",
+    "internal/ingress/annotations/class",
+    "internal/ingress/annotations/clientbodybuffersize",
+    "internal/ingress/annotations/connection",
+    "internal/ingress/annotations/cors",
+    "internal/ingress/annotations/customhttperrors",
+    "internal/ingress/annotations/defaultbackend",
+    "internal/ingress/annotations/http2pushpreload",
+    "internal/ingress/annotations/influxdb",
+    "internal/ingress/annotations/ipwhitelist",
+    "internal/ingress/annotations/loadbalancing",
+    "internal/ingress/annotations/log",
+    "internal/ingress/annotations/luarestywaf",
+    "internal/ingress/annotations/modsecurity",
+    "internal/ingress/annotations/parser",
+    "internal/ingress/annotations/portinredirect",
+    "internal/ingress/annotations/proxy",
+    "internal/ingress/annotations/ratelimit",
+    "internal/ingress/annotations/redirect",
+    "internal/ingress/annotations/rewrite",
+    "internal/ingress/annotations/secureupstream",
+    "internal/ingress/annotations/serversnippet",
+    "internal/ingress/annotations/serviceupstream",
+    "internal/ingress/annotations/sessionaffinity",
+    "internal/ingress/annotations/snippet",
+    "internal/ingress/annotations/sslcipher",
+    "internal/ingress/annotations/sslpassthrough",
+    "internal/ingress/annotations/upstreamhashby",
+    "internal/ingress/annotations/upstreamvhost",
+    "internal/ingress/annotations/xforwardedprefix",
+    "internal/ingress/controller",
+    "internal/ingress/controller/config",
+    "internal/ingress/controller/process",
+    "internal/ingress/controller/store",
+    "internal/ingress/controller/template",
+    "internal/ingress/defaults",
+    "internal/ingress/errors",
+    "internal/ingress/metric",
+    "internal/ingress/metric/collectors",
+    "internal/ingress/resolver",
+    "internal/ingress/status",
+    "internal/k8s",
+    "internal/net",
+    "internal/net/dns",
+    "internal/net/ssl",
+    "internal/runtime",
+    "internal/task",
+    "internal/watch",
+    "test/e2e/annotations",
+    "test/e2e/defaultbackend",
+    "test/e2e/framework",
+    "test/e2e/gracefulshutdown",
+    "test/e2e/loadbalance",
+    "test/e2e/lua",
+    "test/e2e/servicebackend",
+    "test/e2e/settings",
+    "test/e2e/ssl",
+    "test/e2e/status",
+    "test/e2e/tcpudp",
+    "version",
+  ]
+  pruneopts = "NUT"
+  revision = "f7c42b78acd2c612c98624e8e81262e88bd37d23"
+  version = "nginx-0.22.0"
+
+[[projects]]
   digest = "1:9cc257b3c9ff6a0158c9c661ab6eebda1fe8a4a4453cd5c4044dc9a2ebfb992b"
   name = "k8s.io/klog"
   packages = ["."]
@@ -1210,8 +1314,10 @@
   input-imports = [
     "github.com/armon/go-proxyproto",
     "github.com/eapache/channels",
+    "github.com/google/uuid",
     "github.com/imdario/mergo",
     "github.com/json-iterator/go",
+    "github.com/kubernetes/ingress-nginx/images/grpc-fortune-teller/proto/fortune",
     "github.com/kylelemons/godebug/pretty",
     "github.com/mitchellh/go-ps",
     "github.com/mitchellh/hashstructure",
@@ -1230,12 +1336,17 @@
     "github.com/prometheus/client_model/go",
     "github.com/prometheus/common/expfmt",
     "github.com/spf13/pflag",
+    "github.com/vromero/gofortune/lib/fortune",
     "github.com/zakjan/cert-chain-resolver/certUtil",
+    "google.golang.org/grpc",
+    "google.golang.org/grpc/codes",
+    "google.golang.org/grpc/reflection",
     "gopkg.in/fsnotify/fsnotify.v1",
     "gopkg.in/go-playground/pool.v3",
     "k8s.io/api/apps/v1beta1",
     "k8s.io/api/core/v1",
     "k8s.io/api/extensions/v1beta1",
+    "k8s.io/api/rbac/v1",
     "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset",
     "k8s.io/apimachinery/pkg/api/errors",
     "k8s.io/apimachinery/pkg/apis/meta/v1",
@@ -1268,6 +1379,74 @@
     "k8s.io/client-go/util/cert",
     "k8s.io/client-go/util/flowcontrol",
     "k8s.io/client-go/util/workqueue",
+    "k8s.io/ingress-nginx/internal/file",
+    "k8s.io/ingress-nginx/internal/ingress",
+    "k8s.io/ingress-nginx/internal/ingress/annotations",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/alias",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/auth",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/authreq",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/authtls",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/backendprotocol",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/canary",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/class",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/clientbodybuffersize",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/connection",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/cors",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/customhttperrors",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/defaultbackend",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/http2pushpreload",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/influxdb",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/ipwhitelist",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/loadbalancing",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/log",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/luarestywaf",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/modsecurity",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/parser",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/portinredirect",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/proxy",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/ratelimit",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/redirect",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/rewrite",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/secureupstream",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/serversnippet",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/serviceupstream",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/sessionaffinity",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/snippet",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/sslcipher",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/sslpassthrough",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/upstreamhashby",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/upstreamvhost",
+    "k8s.io/ingress-nginx/internal/ingress/annotations/xforwardedprefix",
+    "k8s.io/ingress-nginx/internal/ingress/controller",
+    "k8s.io/ingress-nginx/internal/ingress/controller/config",
+    "k8s.io/ingress-nginx/internal/ingress/controller/process",
+    "k8s.io/ingress-nginx/internal/ingress/controller/store",
+    "k8s.io/ingress-nginx/internal/ingress/controller/template",
+    "k8s.io/ingress-nginx/internal/ingress/defaults",
+    "k8s.io/ingress-nginx/internal/ingress/errors",
+    "k8s.io/ingress-nginx/internal/ingress/metric",
+    "k8s.io/ingress-nginx/internal/ingress/metric/collectors",
+    "k8s.io/ingress-nginx/internal/ingress/resolver",
+    "k8s.io/ingress-nginx/internal/ingress/status",
+    "k8s.io/ingress-nginx/internal/k8s",
+    "k8s.io/ingress-nginx/internal/net",
+    "k8s.io/ingress-nginx/internal/net/dns",
+    "k8s.io/ingress-nginx/internal/net/ssl",
+    "k8s.io/ingress-nginx/internal/runtime",
+    "k8s.io/ingress-nginx/internal/task",
+    "k8s.io/ingress-nginx/internal/watch",
+    "k8s.io/ingress-nginx/test/e2e/annotations",
+    "k8s.io/ingress-nginx/test/e2e/defaultbackend",
+    "k8s.io/ingress-nginx/test/e2e/framework",
+    "k8s.io/ingress-nginx/test/e2e/gracefulshutdown",
+    "k8s.io/ingress-nginx/test/e2e/loadbalance",
+    "k8s.io/ingress-nginx/test/e2e/lua",
+    "k8s.io/ingress-nginx/test/e2e/servicebackend",
+    "k8s.io/ingress-nginx/test/e2e/settings",
+    "k8s.io/ingress-nginx/test/e2e/ssl",
+    "k8s.io/ingress-nginx/test/e2e/status",
+    "k8s.io/ingress-nginx/test/e2e/tcpudp",
+    "k8s.io/ingress-nginx/version",
     "k8s.io/klog",
     "k8s.io/kubernetes/pkg/api/v1/pod",
     "k8s.io/kubernetes/pkg/kubelet/util/sliceutils",
