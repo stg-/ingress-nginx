@@ -915,7 +915,6 @@ func (n *NGINXController) serviceEndpoints(svcKey, backendPort string) ([]ingres
 func (n *NGINXController) getDefaultSSLCertificate() *ingress.SSLCert {
 	// read custom default SSL certificate, fall back to generated default certificate
 	if n.cfg.DefaultSSLCertificate != "" {
-		klog.Warningf("[STG] getDefaultSSLCertificate - DefaultSSLCertificate: %s", n.cfg.DefaultSSLCertificate)
 		certificate, err := n.store.GetLocalSSLCert(n.cfg.DefaultSSLCertificate)
 		if err == nil {
 			return certificate
@@ -1051,7 +1050,6 @@ func (n *NGINXController) createServers(data []*ingress.Ingress,
 
 	// configure default location, alias, and SSL
 	for _, ing := range data {
-		klog.Warningf("[STG] controller createServers")
 
 		ingKey := k8s.MetaNamespaceKey(ing)
 		anns := ing.ParsedAnnotations
@@ -1062,8 +1060,6 @@ func (n *NGINXController) createServers(data []*ingress.Ingress,
 		}
 
 		for _, rule := range ing.Spec.Rules {
-
-			klog.Warningf("[STG] controller createServers - rule: %v", rule)
 
 			host := rule.Host
 			if host == "" {
@@ -1103,15 +1099,13 @@ func (n *NGINXController) createServers(data []*ingress.Ingress,
 				continue
 			}
 
-			// tlsSecretName := extractTLSSecretName(host, ing, n.store.GetLocalSSLCert)
-			tlsSecretName := extractTLSVaultPath(host, ing, n.store.GetLocalSSLCert)
+			tlsSecretName := extractTLSSecretName(host, ing, n.store.GetLocalSSLCert)
+			// tlsSecretName := extractTLSVaultPath(host, ing, n.store.GetLocalSSLCert)
 			if tlsSecretName == "" {
 				klog.V(3).Infof("Host %q is listed in the TLS section but secretName is empty. Using default certificate.", host)
 				servers[host].SSLCert = n.getDefaultSSLCertificate()
 				continue
 			}
-
-			klog.Warningf("[STG] controller createServers - secretName: %s", tlsSecretName)
 
 			secrKey := fmt.Sprintf("%v/%v", ing.Namespace, tlsSecretName)
 			cert, err := n.store.GetLocalSSLCert(secrKey)
@@ -1340,62 +1334,6 @@ func mergeAlternativeBackends(ing *ingress.Ingress, upstreams map[string]*ingres
 	}
 }
 
-// func getVaultCert() string {
-// 	return "mycert"
-// }
-
-// extractTLSVaultPath returns the path in Vault containing a SSL
-// certificate for the given host name, or an empty string.
-// This method uses secretName as the path in Vault so we don't have
-// to define a CRD.
-func extractTLSVaultPath(host string, ing *ingress.Ingress,
-	getLocalSSLCert func(string) (*ingress.SSLCert, error)) string {
-
-	if ing == nil {
-		return ""
-	}
-
-	// naively return Secret name from TLS spec if host name matches
-	for _, tls := range ing.Spec.TLS {
-		if sets.NewString(tls.Hosts...).Has(host) {
-			return tls.SecretName
-		}
-	}
-
-	// no TLS host matching host name, try each TLS host for matching SAN or CN
-	for _, tls := range ing.Spec.TLS {
-
-		if tls.SecretName == "" {
-			// There's no secretName specified, so it will never be available
-			continue
-		}
-
-		// secrKey := fmt.Sprintf("%v/%v", ing.Namespace, tls.SecretName)
-		secrKey := tls.SecretName
-
-		klog.Warningf("[STG] controller getLocalSSLCert - secrKey: %s", secrKey)
-
-		cert, err := getLocalSSLCert(secrKey)
-		if err != nil {
-			klog.Warningf("Error getting SSL certificate %q: %v", secrKey, err)
-			continue
-		}
-
-		if cert == nil { // for tests
-			continue
-		}
-
-		err = cert.Certificate.VerifyHostname(host)
-		if err != nil {
-			continue
-		}
-		klog.V(3).Infof("Found SSL certificate matching host %q: %q", host, secrKey)
-		return tls.SecretName
-	}
-
-	return ""
-}
-
 // extractTLSSecretName returns the name of the Secret containing a SSL
 // certificate for the given host name, or an empty string.
 func extractTLSSecretName(host string, ing *ingress.Ingress,
@@ -1421,6 +1359,7 @@ func extractTLSSecretName(host string, ing *ingress.Ingress,
 		}
 
 		secrKey := fmt.Sprintf("%v/%v", ing.Namespace, tls.SecretName)
+		// secrKey := tls.SecretName
 
 		cert, err := getLocalSSLCert(secrKey)
 		if err != nil {

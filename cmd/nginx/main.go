@@ -52,8 +52,6 @@ import (
 
 func main() {
 
-	fmt.Println("[STG] First message")
-
 	klog.InitFlags(nil)
 
 	rand.Seed(time.Now().UnixNano())
